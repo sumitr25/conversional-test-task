@@ -6,5 +6,3 @@ const BoxComponent = (props) => (
 );
 
 export default BoxComponent;
-
-

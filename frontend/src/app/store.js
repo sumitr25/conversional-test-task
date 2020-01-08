@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducer from './rootReducer';
+import sagaMiddleware from './rootSaga';
 
 const store = configureStore({
   reducer,
+  middleware: [ sagaMiddleware ],
 });
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
