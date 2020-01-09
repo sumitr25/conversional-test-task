@@ -7,8 +7,8 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const ListComponent = (props) => (
   <List>
-    {(props.data || [] ).map(text => (
-      <ListItem>
+    {(props.li || [] ).map(text => (
+      <ListItem key={text}>
         <ListItemIcon>
           <FiberManualRecordIcon />
         </ListItemIcon>

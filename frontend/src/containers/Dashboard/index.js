@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getConfig } from './reducer';
+import { parser } from '../../utils/parser';
 
-const Dashboard = () => {
-  return (
-    <div>
-      <h1>Hey There!</h1>
-    </div>
-  );
+const Dashboard = (props) => {
+  // props.getConfig();
+
+  useEffect(() => {
+    props.getConfig()
+  }, []);
+
+  return (<div>{props.config && parser(props.config, 'Dashboard')}</div>);
 }
 
-export default Dashboard;
+const mapDispatchToProps = { getConfig };
+
+const mapStateToProps = (state) => {
+  return {
+    config: state.dashboard.dashboard,
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Dashboard);

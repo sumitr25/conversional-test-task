@@ -1,17 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const dummySlice = createSlice({
-  name: 'dummy',
-  initialState: [],
+const configSlice = createSlice({
+  name: 'config',
+  initialState: {
+    error: null,
+    dashboard: null,
+    loading: false,
+  },
   reducers: {
-    createDummy(state, action) {},
-    updateDummy(state, action) {},
-    deleteDummy(state, action) {}
+    getConfig(state, action) {
+      state.loading = true;
+    },
+    successInGettingConfig(state, action) {
+      state.dashboard = action.payload;
+      state.loading = false;
+    },
+    errorInGettingConfig(state, action) {
+      state.error = action.payload;
+      state.loading = false;
+    }
   }
 })
 // Extract the action creators object and the reducer
-const { actions, reducer } = dummySlice
+const { actions, reducer } = configSlice;
 // Extract and export each action creator by name
-export const { createDummy, updateDummy, deleteDummy } = actions
+export const { getConfig, successInGettingConfig, errorInGettingConfig } = actions;
 // Export the reducer, either as a default or named export
-export default reducer
+export default reducer;
