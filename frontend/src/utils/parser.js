@@ -47,19 +47,23 @@ export const getComponentFromConfig = (config, name) => {
       super(props);
       const injectModules = config.Content.injectModules;
 
-      this.state = (injectModules || []).map(mod => modules[mod.name].states(mod.stateKey, mod.initialValue)).reduce((acc, cur) => {
-        return {
-          ...acc,
-          ...cur,
-        }
-      }, {});
+      this.state = (injectModules || [])
+        .map(mod => modules[mod.name].states(mod.stateKey, mod.initialValue))
+        .reduce((acc, cur) => {
+          return {
+            ...acc,
+            ...cur,
+          }
+        }, {});
 
-      this.functions = (injectModules || []).map(mod => modules[mod.name].functions(this, mod.stateKey)).reduce((acc, cur) => {
-        return {
-          ...acc,
-          ...cur,
-        }
-      }, {});
+      this.functions = (injectModules || [])
+        .map(mod => modules[mod.name].functions(this, mod.stateKey))
+        .reduce((acc, cur) => {
+          return {
+            ...acc,
+            ...cur,
+          }
+        }, {});
     }
 
     render() {
