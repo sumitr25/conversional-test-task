@@ -3,7 +3,10 @@
 		"type": "BoxComponent",
 		"props": {
 			"borderSize": "2px"
-		}
+		},
+		"injectModules": [
+			"Modal"
+		]
 	},
 	"Children": {
 		"Modal": {
@@ -13,6 +16,14 @@
 					"isOpen": true,
 					"width": "500px",
 					"height": "400px"
+				},
+				"injectedProps": {
+					"states": {
+						"isOpen": "isOpen"
+					},
+					"functions": {
+						"onClose": "closeModal"
+					}
 				}
 			},
 			"Children": {
@@ -47,6 +58,11 @@
 						"type": "ButtonComponent",
 						"props": {
 							"text": "Click me to open the modal"
+						},
+						"injectedProps": {
+							"functions": {
+								"onClick": "openModal"
+							}
 						}
 					}
 				},
