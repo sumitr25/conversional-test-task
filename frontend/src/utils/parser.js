@@ -1,5 +1,5 @@
 import React from 'react';
-import componentsMapping from '../components/componentsMapping';
+import components from '../components';
 import modules from '../modules';
 
 export const parser = (pageConfig, key, state, func) => {
@@ -28,7 +28,7 @@ export const parser = (pageConfig, key, state, func) => {
     }
   }
 
-  const Component = componentsMapping[type];
+  const Component = components[type];
 
   if (!Component) {
     throw Error(`Not a component!! ${Content.type}`);

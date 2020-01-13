@@ -7,7 +7,7 @@ import ListComponent from './ListComponent';
 import ParagraphComponent from './ParagraphComponent';
 import ModalComponent from './ModalComponent';
 
-const componentsMapping = {
+export default {
   H1Component,
   H2Component,
   ButtonComponent,
@@ -17,5 +17,3 @@ const componentsMapping = {
   ParagraphComponent,
   ModalComponent,
 };
-
-export default componentsMapping;

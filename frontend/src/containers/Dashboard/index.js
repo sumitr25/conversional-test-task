@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getConfig } from './reducer';
 import { getWrapped } from '../../utils/parser';
@@ -6,11 +6,13 @@ import { getWrapped } from '../../utils/parser';
 const Dashboard = (props) => {
 
   useEffect(() => {
-    props.getConfig()
-  }, []);
+    if (!props.config) {
+      props.getConfig(props.location)
+    }
+  }, [props.location]);
 
   if (props.config) {
-    const Component = getWrapped(props.config, 'Dashboard');
+    const Component = getWrapped(props.config, props.location);
     return <Component />
   }
 
@@ -19,9 +21,11 @@ const Dashboard = (props) => {
 
 const mapDispatchToProps = { getConfig };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const location = props.location.pathname;
   return {
-    config: state.dashboard.dashboard,
+    location,
+    config: state.config[location],
   }
 };
 

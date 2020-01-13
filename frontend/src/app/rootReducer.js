@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import dashboardReducer from '../containers/Dashboard/reducer';
+import configReducer from '../containers/Dashboard/reducer';
 
-export default combineReducers({ dashboard: dashboardReducer });
+export default combineReducers({ config: configReducer });

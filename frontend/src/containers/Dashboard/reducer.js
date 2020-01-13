@@ -12,7 +12,7 @@ const configSlice = createSlice({
       state.loading = true;
     },
     successInGettingConfig(state, action) {
-      state.dashboard = action.payload;
+      state[action.payload.path] = action.payload.data;
       state.loading = false;
     },
     errorInGettingConfig(state, action) {
