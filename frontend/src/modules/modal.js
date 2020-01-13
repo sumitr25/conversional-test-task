@@ -1,9 +1,9 @@
 export const modalModule = {
-  states: {
-    isOpen: false, 
-  },
-  functions: (self) => ({
-    openModal: () => self.setState({ isOpen: true }),
-    closeModal: () => self.setState({ isOpen: false }),
+  states: (key, initialValue) => ({
+    [key]: initialValue, 
+  }),
+  functions: (self, key) => ({
+    openModal: () => self.setState({ [key]: true }),
+    closeModal: () => self.setState({ [key]: false }),
   }),
 }

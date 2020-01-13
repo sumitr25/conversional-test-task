@@ -1,5 +1,5 @@
 import createSagaMiddleware from 'redux-saga';
-import fetchConfigSaga from '../containers/Dashboard/saga';
+import fetchConfigSaga from '../containers/Main/saga';
 
 const sagaMiddleware = createSagaMiddleware()
 

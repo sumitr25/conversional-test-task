@@ -5,7 +5,11 @@
 			"borderSize": "2px"
 		},
 		"injectModules": [
-			"Modal"
+			{
+				"name": "Modal",
+				"stateKey": "isOpen",
+				"initialValue": false
+			}
 		]
 	},
 	"Children": {

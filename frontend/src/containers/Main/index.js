@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getConfig } from './reducer';
-import { getWrapped } from '../../utils/parser';
+import { getComponentFromConfig } from '../../utils/parser';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import H2Component from '../../components/H2Component'
 
-const Dashboard = (props) => {
+const Main = (props) => {
 
   useEffect(() => {
     if (!props.config) {
@@ -12,11 +14,23 @@ const Dashboard = (props) => {
   }, [props.location]);
 
   if (props.config) {
-    const Component = getWrapped(props.config, props.location);
+    const Component = getComponentFromConfig(props.config, props.location);
     return <Component />
   }
 
-  return <div></div>;
+  if(props.error) {
+    return (
+      <div>
+        <H2Component text={props.error}/>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <CircularProgress />  
+    </div>
+  );
 }
 
 const mapDispatchToProps = { getConfig };
@@ -26,10 +40,11 @@ const mapStateToProps = (state, props) => {
   return {
     location,
     config: state.config[location],
+    error: state.config.error
   }
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Dashboard);
+)(Main);

@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import PropTypes from 'prop-types';
 
 const ListComponent = (props) => (
   <List>
@@ -19,5 +20,9 @@ const ListComponent = (props) => (
     ))}
   </List>
 );
+
+ListComponent.propTypes = {
+  li: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default ListComponent;

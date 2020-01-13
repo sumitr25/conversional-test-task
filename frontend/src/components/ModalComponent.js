@@ -1,5 +1,6 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
+import PropTypes from 'prop-types';
 
 const ModalComponent = (props) => (
   <Dialog
@@ -11,5 +12,11 @@ const ModalComponent = (props) => (
     {props.children}
   </Dialog>
 );
+
+ModalComponent.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+};
 
 export default ModalComponent;
