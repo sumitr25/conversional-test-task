@@ -26,7 +26,7 @@ A React application to render build compoents from provided json data according 
 
 - Setup the dev env by running `make set-up-dev`
 
-- Start frontend and backend server by running `start-dev`
+- Start frontend and backend server by running `make start-dev`
 
   
 
