@@ -3,6 +3,7 @@ FROM node:12-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV REACT_APP_BACKEND_URL=http://localhost:3000
 
 COPY ./frontend /frontend
 

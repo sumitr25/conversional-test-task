@@ -86,7 +86,7 @@ build-all-dev-images:
 set-up-dev: install-docker-if-not-already-installed build-all-dev-images
 
 start-dev:
-	@docker-compose up -d
+	@docker-compose up
 
 stop-dev:
 	@docker-compose stop
@@ -107,6 +107,10 @@ spin-up-prod-server:
 
 # start production server
 start: build-prod-image spin-up-prod-server
+
+# stop production server
+stop:
+	@docker stop component-builder-app
 
 # remove production docker image
 clear: wipe-prod-image
