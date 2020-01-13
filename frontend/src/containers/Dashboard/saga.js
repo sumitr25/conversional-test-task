@@ -4,7 +4,7 @@ import { getConfig, successInGettingConfig, errorInGettingConfig } from './reduc
 
 function* fetchConfig(action) {
    try {
-      const data = yield call(getRequest, 'http://localhost:3001/data.json');
+      const data = yield call(getRequest, 'http://localhost:3001/data2.json');
       yield put({ type: successInGettingConfig.type, payload: data });
    } catch (e) {
       yield put({ type: errorInGettingConfig.type, payload: e.message });

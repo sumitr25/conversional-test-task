@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getConfig } from './reducer';
-import { parser } from '../../utils/parser';
+import { getWrapped } from '../../utils/parser';
 
 const Dashboard = (props) => {
-  // props.getConfig();
 
   useEffect(() => {
     props.getConfig()
   }, []);
 
-  return (<div>{props.config && parser(props.config, 'Dashboard')}</div>);
+  if (props.config) {
+    const Component = getWrapped(props.config, 'Dashboard');
+    return <Component />
+  }
+
+  return <div></div>;
 }
 
 const mapDispatchToProps = { getConfig };

@@ -1,9 +1,32 @@
 import React from 'react';
 import componentsMapping from '../components/componentsMapping';
+import modules from '../modules';
 
-export const parser = (pageConfig, key) => {
+export const parser = (pageConfig, key, state, func) => {
   const { Content, Children } = pageConfig;
-  const { type, props }= Content;
+  const { type, injectedProps }= Content;
+
+  let props = Content.props;
+
+  if (injectedProps) {
+    const { states, functions } = injectedProps;
+
+    const injectedStates = states && Object.keys(states).reduce((accumulator, current) => {
+      accumulator[current] = state[states[current]];
+      return accumulator;
+    }, {});
+  
+    const injectedFunctions = functions && Object.keys(functions).reduce((accumulator, current) => {
+      accumulator[current] = func[functions[current]];
+      return accumulator;
+    }, {});
+    
+    props = {
+      ...Content.props,
+      ...injectedStates,
+      ...injectedFunctions,
+    }
+  }
 
   const Component = componentsMapping[type];
 
@@ -12,8 +35,46 @@ export const parser = (pageConfig, key) => {
   }
 
   if (Children) {
-    const children = Object.keys(Children).map(key => parser(Children[key], key));
-    return <Component children={children} key={key}/>
+    const children = Object.keys(Children).map(key => parser(Children[key], key, state, func));
+    return <Component {...props} children={children} key={key} />
   }
-  return <Component {...props} key={key}/>
+  return <Component {...props} key={key} />
+}
+
+export const getWrapped = (config, name) => {
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      const injectModules = config.Content.injectModules;
+
+      this.state = (injectModules || []).map(mod => modules[mod].states).reduce((acc, cur) => {
+        return {
+          ...acc,
+          ...cur,
+        }
+      }, {});
+
+      this.functions = (injectModules || []).map(mod => modules[mod].functions(this)).reduce((acc, cur) => {
+        return {
+          ...acc,
+          ...cur,
+        }
+      }, {});
+    }
+
+    render() {
+      return (
+        <div>
+          {
+            parser(
+              config, 
+              name, 
+              this.state, 
+              this.functions,
+            )
+          }
+        </div>
+      );
+    }
+  };
 }

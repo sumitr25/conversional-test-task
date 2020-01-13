@@ -5,6 +5,7 @@ import BoxComponent from './BoxComponent';
 import LinkComponent from './LinkComponent';
 import ListComponent from './ListComponent';
 import ParagraphComponent from './ParagraphComponent';
+import ModalComponent from './ModalComponent';
 
 const componentsMapping = {
   H1Component,
@@ -14,6 +15,7 @@ const componentsMapping = {
   LinkComponent,
   ListComponent,
   ParagraphComponent,
+  ModalComponent,
 };
 
 export default componentsMapping;
